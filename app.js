@@ -9,7 +9,7 @@ switch (comando) {
         porHacer.crear(argv.descripcion);
         break;
     case 'listar':
-        let listado = porHacer.getListado();
+        let listado = porHacer.getListado( argv.filtro );
         for (let tarea of listado) {
             console.log("=== Tarea por Hacer ===".green);
             console.log(tarea.descripcion);
@@ -18,7 +18,6 @@ switch (comando) {
         }
         break;
     case 'actualizar':
-
         let actualizado = porHacer.actualizar(argv.descripcion, argv.completado);
         console.log(actualizado);
         break;

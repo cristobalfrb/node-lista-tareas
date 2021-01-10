@@ -1,13 +1,20 @@
+
 const descripcion = {
     demand: true,
     alias: 'd',
-    desc: 'Descripcion de la tarea por hacer',
+    description: 'Descripcion de la tarea por hacer',
 }
 
 const completado = {
     alias: 'c',
     default: true,
-    desc: 'Define com complatada o pendiente la tarea',
+    description: 'Define tareas por completado',
+}
+
+const filtro = {
+    type: 'boolean',
+    alias: 'f',
+    description: 'Filtra la lista de tareas por completadas'
 }
 
 //Creacion de los comandos
@@ -21,6 +28,9 @@ const argv = require('yargs')
     })
     .command('borrar', 'Borra la tarea completamente', {
         descripcion
+    })
+    .command('listar', 'Listar las tareas actuales',{
+        filtro
     })
     .help()
     .argv;

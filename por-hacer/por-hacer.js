@@ -1,4 +1,7 @@
 const fs = require('fs');
+const {
+    boolean
+} = require('yargs');
 
 let listadoPorHacer = [];
 
@@ -39,9 +42,26 @@ const crear = (descripcion) => {
     return porHacer;
 }
 
-const getListado = () => {
+const getListado = (filtro) => {
+
     cargarDB();
-    return listadoPorHacer;
+    let listadoNuevo = []
+
+    if (filtro === true) {
+        listadoNuevo = listadoPorHacer.filter(tarea => {
+            return tarea.completado == true;
+        })
+        return listadoNuevo;
+    } else if (filtro === false) {
+        listadoNuevo = listadoPorHacer.filter(tarea => {
+            return tarea.completado == false;
+        })
+        return listadoNuevo;
+    } else {
+        return listadoPorHacer;
+    }
+
+
 }
 
 const actualizar = (descripcion, completado = true) => {
@@ -70,10 +90,10 @@ const borrar = (desc) => {
         return tarea.descripcion != desc;
     });
 
-    if( listadoPorHacer.length < actual ){
+    if (listadoPorHacer.length < actual) {
         guardarDB();
         return true;
-    }else{
+    } else {
         return false;
     }
 }
